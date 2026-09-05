@@ -32,20 +32,22 @@ jobs:
           gradle-version: "8.9"
 
       - name: Verify project
+        working-directory: HomeHub_Mobile_Tablet_UI_REWORK_v3
         run: |
-          echo "===== CURRENT DIRECTORY ====="
+          echo "===== PROJECT ====="
           pwd
 
-          echo "===== PROJECT FILES ====="
+          echo "===== FILES ====="
           ls -la
 
           echo "===== GRADLE PROPERTIES ====="
           cat gradle.properties
 
-          echo "===== SETTINGS FILE ====="
+          echo "===== SETTINGS ====="
           cat settings.gradle.kts
 
       - name: Build APK
+        working-directory: HomeHub_Mobile_Tablet_UI_REWORK_v3
         run: |
           gradle --no-daemon \
             -Pandroid.useAndroidX=true \
