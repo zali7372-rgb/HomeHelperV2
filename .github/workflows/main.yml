@@ -2,7 +2,7 @@ name: Build HomeHub Android
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -17,13 +17,13 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: "17"
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
       - name: Build APK
-        working-directory: mobile/HomeHubMobile
+        working-directory: HomeHub_Mobile_Tablet_UI_REWORK_v3/HomeHubMobile
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug
@@ -32,4 +32,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: HomeHub-debug-apk
-          path: mobile/HomeHubMobile/app/build/outputs/apk/debug/app-debug.apk
+          path: HomeHub_Mobile_Tablet_UI_REWORK_v3/HomeHubMobile/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
