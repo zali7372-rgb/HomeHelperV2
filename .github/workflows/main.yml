@@ -31,13 +31,27 @@ jobs:
         with:
           gradle-version: "8.9"
 
+      - name: Verify project
+        working-directory: HomeHub_Mobile_Tablet_UI_REWORK_v3
+        run: |
+          echo "===== PROJECT ====="
+          pwd
+          echo "===== FILES ====="
+          ls -la
+          echo "===== GRADLE PROPERTIES ====="
+          cat ../gradle.properties
+
       - name: Build APK
-        working-directory: HomeHub_Mobile_Tablet_UI_REWORK_v3/HomeHubMobile
-        run: gradle assembleDebug
+        working-directory: HomeHub_Mobile_Tablet_UI_REWORK_v3
+        run: |
+          gradle --no-daemon \
+            -Pandroid.useAndroidX=true \
+            -Pandroid.enableJetifier=true \
+            assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: HomeHub-debug-apk
-          path: HomeHub_Mobile_Tablet_UI_REWORK_v3/HomeHubMobile/app/build/outputs/apk/debug/app-debug.apk
+          path: HomeHub_Mobile_Tablet_UI_REWORK_v3/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
